@@ -182,29 +182,28 @@
                                 </a>
 
                                 {{-- HAPUS --}}
-                                <form
-                                    action="{{ route('guru.penilaian.destroy', $siswa->penilaian->id) }}"
-                                    method="POST"
-                                    onsubmit="return confirm('Yakin ingin menghapus penilaian siswa ini?')"
-                                >
+<form
+    action="{{ route('guru.penilaian.destroy', $siswa->penilaian->id) }}"
+    method="POST"
+    class="form-delete"
+    data-confirm-message="Yakin ingin menghapus penilaian siswa ini?"
+>
+    @csrf
+    @method('DELETE')
 
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button
-                                        type="submit"
-                                        class="inline-flex items-center rounded-lg
-                                            bg-red-500/10
-                                            border border-red-500/15
-                                            px-3 py-2
-                                            text-xs font-semibold text-red-400
-                                            hover:bg-red-500/20
-                                            transition"
-                                    >
-                                        Hapus
-                                    </button>
-
-                                </form>
+    <button
+        type="submit"
+        class="inline-flex items-center rounded-lg
+            bg-red-500/10
+            border border-red-500/15
+            px-3 py-2
+            text-xs font-semibold text-red-400
+            hover:bg-red-500/20
+            transition"
+    >
+        Hapus
+    </button>
+</form>
 
                             </div>
 
@@ -254,4 +253,10 @@
 
     </div>
 
+    {{-- PAGINATION --}}
+    @if($siswas->hasPages())
+        <div class="mt-6 flex justify-center">
+            {{ $siswas->onEachSide(1)->links() }}
+        </div>
+    @endif
 </x-guru-layout>

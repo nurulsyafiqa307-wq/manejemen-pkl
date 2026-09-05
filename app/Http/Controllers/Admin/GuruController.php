@@ -46,7 +46,7 @@ class GuruController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'nip' => 'required|string|max:50|unique:gurus,nip',
-            'no_hp' => 'nullable|string|max:20',
+            'no_hp' => 'nullable|digits_between:10,15',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
         ]);
@@ -87,7 +87,7 @@ class GuruController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'nip' => 'required|string|max:50|unique:gurus,nip,' . $guru->id,
-            'no_hp' => 'nullable|string|max:20',
+            'no_hp' => 'nullable|digits_between:10,15',
             'email' => 'required|email|unique:users,email,' . $guru->user_id,
             'password' => 'nullable|string|min:8',
         ]);

@@ -120,10 +120,15 @@
                     </label>
                     <div class="relative">
                         <i data-lucide="phone" class="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5" style="color: var(--text-dim);"></i>
-                        <input type="text" name="no_hp"
-                               value="{{ old('no_hp', $tempat->no_hp) }}"
-                               class="input-dark w-full rounded-lg pl-10 pr-3.5 py-2.5 text-[12.5px]"
-                               placeholder="08123456789">
+                        <input type="tel"
+                            name="no_hp"
+                            value="{{ old('no_hp', $tempat->no_hp) }}"
+                            class="input-dark w-full rounded-lg pl-10 pr-3.5 py-2.5 text-[12.5px]"
+                            placeholder="08123456789"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            maxlength="15"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                 </div>
 

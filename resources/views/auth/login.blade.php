@@ -80,10 +80,7 @@
                         <label class="flex items-center gap-2 cursor-pointer select-none">
                             <input type="checkbox" name="remember" class="rounded bg-slate-800 border-slate-700 text-indigo-500 focus:ring-indigo-500/40">
                             <span class="text-xs text-slate-500">Ingat saya</span>
-                        </label>
-                        @if(Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-xs text-indigo-400/80 hover:text-indigo-300 transition-colors">Lupa Password?</a>
-                        @endif
+                        </label>                           
                     </div>
 
                     <div class="pt-2">

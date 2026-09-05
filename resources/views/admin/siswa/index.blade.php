@@ -463,34 +463,25 @@
 
                                     {{-- Hapus --}}
                                     <form
-                                        action="{{ route('admin.siswa.destroy', $siswa->id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus data siswa ini?')"
-                                    >
+    action="{{ route('admin.siswa.destroy', $siswa->id) }}"
+    method="POST"
+    class="form-delete"
+    data-confirm-message="Yakin ingin menghapus data siswa ini?"
+>
+    @csrf
+    @method('DELETE')
 
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition"
-                                            style="color: #f87171; background: rgba(239,68,68,0.08);"
-                                            onmouseover="this.style.background='rgba(239,68,68,0.15)'"
-                                            onmouseout="this.style.background='rgba(239,68,68,0.08)'"
-                                        >
-
-                                            <i
-                                                data-lucide="trash-2"
-                                                class="h-3 w-3"
-                                            ></i>
-
-                                            <span class="hidden sm:inline">
-                                                Hapus
-                                            </span>
-
-                                        </button>
-
-                                    </form>
+    <button
+        type="submit"
+        class="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition"
+        style="color: #f87171; background: rgba(239,68,68,0.08);"
+        onmouseover="this.style.background='rgba(239,68,68,0.15)'"
+        onmouseout="this.style.background='rgba(239,68,68,0.08)'"
+    >
+        <i data-lucide="trash-2" class="h-3 w-3"></i>
+        <span class="hidden sm:inline">Hapus</span>
+    </button>
+</form>
 
                                 </div>
 

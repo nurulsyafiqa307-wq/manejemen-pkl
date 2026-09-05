@@ -480,6 +480,75 @@
     </main>
 
 </div>
+    <!-- Library SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Konfigurasi dasar SweetAlert2 agar sesuai dengan warna website guru (Tema gelap)
+            const SwalDark = Swal.mixin({
+                background: '#0f172a', // Warna background slate-900
+                color: '#ffffff',      // Warna teks utama
+                confirmButtonColor: '#6366f1', // Warna indigo tombol OK
+                cancelButtonColor: '#ef4444', // Warna merah tombol batal
+            });
+
+            // Cari semua form yang memiliki kelas 'form-delete'
+            const deleteForms = document.querySelectorAll('form.form-delete');
+
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); // Mencegah form langsung terkirim
+
+                    // Ambil pesan kustom jika ada, kalau tidak ada pakai pesan default
+                    const confirmMessage = form.getAttribute('data-confirm-message') || "Data yang dihapus tidak dapat dikembalikan!";
+
+                    SwalDark.fire({
+                        title: 'Yakin ingin menghapus?',
+                        text: confirmMessage,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal',
+                        position: 'center',
+                        customClass: {
+                            popup: 'swal2-dark-popup'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Lanjutkan proses hapus jika user klik "Ya, hapus!"
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+    <!-- CSS untuk memperbaiki posisi agar PASTI di tengah -->
+    <style>
+        .swal2-container {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            inset: 0 !important;
+        }
+        .swal2-dark-popup {
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+        }
+        .swal2-styled.swal2-confirm {
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+        }
+        .swal2-styled.swal2-cancel {
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+        }
+    </style>
 </body>
 </html>

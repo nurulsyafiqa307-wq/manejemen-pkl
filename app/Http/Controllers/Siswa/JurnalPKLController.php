@@ -13,20 +13,51 @@ class JurnalPKLController extends Controller
     /**
      * Menampilkan jurnal milik siswa yang sedang login.
      */
-    public function index()
-    {
-        $siswa = Auth::user()->siswa;
+    public function index(Request $request)
+{
+    $siswa = Auth::user()->siswa;
 
-        if (!$siswa) {
-            abort(403, 'Data siswa tidak ditemukan.');
-        }
-
-        $jurnals = JurnalPKL::where('siswa_id', $siswa->id)
-            ->latest('tanggal')
-            ->get();
-
-        return view('siswa.jurnal.index', compact('jurnals'));
+    if (!$siswa) {
+        abort(403, 'Data siswa tidak ditemukan.');
     }
+
+    // Ambil semua bulan yang memiliki jurnal
+    $bulanTersedia = JurnalPKL::where('siswa_id', $siswa->id)
+        ->selectRaw("DATE_FORMAT(tanggal, '%Y-%m') as bulan")
+        ->groupBy('bulan')
+        ->orderBy('bulan')
+        ->pluck('bulan');
+
+    // Jika belum memilih bulan, buka bulan dari jurnal terbaru
+    if ($request->filled('bulan')) {
+        $bulan = $request->input('bulan');
+
+        // Pastikan bulan yang dipilih memang dimiliki siswa
+        if (!$bulanTersedia->contains($bulan)) {
+            $bulan = $bulanTersedia->last();
+        }
+    } else {
+        $bulan = $bulanTersedia->last();
+    }
+
+    // Jika belum ada jurnal sama sekali
+    if (!$bulan) {
+        $bulan = now()->format('Y-m');
+    }
+
+    // Ambil jurnal hanya dari bulan yang sedang dipilih
+    $jurnals = JurnalPKL::where('siswa_id', $siswa->id)
+        ->whereYear('tanggal', substr($bulan, 0, 4))
+        ->whereMonth('tanggal', substr($bulan, 5, 2))
+        ->latest('tanggal')
+        ->get();
+
+    return view('siswa.jurnal.index', compact(
+        'jurnals',
+        'bulan',
+        'bulanTersedia'
+    ));
+}
 
 
     /**
@@ -167,4 +198,26 @@ class JurnalPKLController extends Controller
             ->route('siswa.jurnal.index')
             ->with('success', 'Jurnal berhasil diperbaiki dan dikirim kembali untuk direview.');
     }
+
+    /**
+ * Menghapus jurnal milik siswa.
+ */
+public function destroy(int $id)
+{
+    $siswa = Auth::user()->siswa;
+
+    if (!$siswa) {
+        abort(403, 'Data siswa tidak ditemukan.');
+    }
+
+    $jurnal = JurnalPKL::where('id_jurnal', $id)
+        ->where('siswa_id', $siswa->id)
+        ->firstOrFail();
+
+    $jurnal->delete();
+
+    return redirect()
+        ->route('siswa.jurnal.index')
+        ->with('success', 'Jurnal berhasil dihapus.');
+}
 }

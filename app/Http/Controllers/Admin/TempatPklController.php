@@ -22,7 +22,7 @@ class TempatPklController extends Controller
                 });
             })
             ->latest()
-            ->paginate(10)
+            ->paginate(9)
             ->withQueryString();
 
         return view('admin.tempat.index', compact('tempats', 'search'));
@@ -39,7 +39,7 @@ class TempatPklController extends Controller
             'nama_perusahaan' => 'required',
             'bidang' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => 'required|digits_between:10,15',
             'kuota' => 'required|integer|min:0',
             'keterangan' => 'nullable',
         ]);
@@ -67,7 +67,7 @@ class TempatPklController extends Controller
             'nama_perusahaan' => 'required',
             'bidang' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => 'required|digits_between:10,15',
             'kuota' => 'required|integer|min:0',
             'keterangan' => 'nullable',
         ]);

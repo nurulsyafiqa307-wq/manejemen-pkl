@@ -643,23 +643,8 @@
                     </a>
                 </div>
 
-                <div class="my-3.5" style="border-top: 1px solid var(--border);"></div>
-
-                <p class="mb-2 px-2.5 text-[9px] font-bold uppercase tracking-[0.1em]" style="color: var(--text-dim);">Aktivitas</p>
-                <div class="space-y-0.5">
-                   <a href="{{ route('admin.jurnal.index') }}" 
-                        class="nav-link {{ request()->routeIs('admin.jurnal.*') ? 'active' : '' }} flex items-center gap-2.5 px-2.5 py-[9px] text-[12.5px] font-medium">
-                        <i data-lucide="notebook-pen" class="h-4 w-4 shrink-0"></i> Jurnal Harian
-                    </a>
-                    <a href="{{ route('admin.penilaian.index') }}" 
-                    class="nav-link {{ request()->routeIs('admin.penilaian.*') ? 'active' : '' }} flex items-center gap-2.5 px-2.5 py-[9px] text-[12.5px] font-medium">
-                        <i data-lucide="clipboard-check" class="h-4 w-4 shrink-0"></i> Penilaian PKL
-                    </a>
-                    <a href="{{ route('admin.laporan.index') }}" 
-                        class="nav-link {{ request()->routeIs('admin.laporan.*') ? 'active' : '' }} flex items-center gap-2.5 px-2.5 py-[9px] text-[12.5px] font-medium">
-                        <i data-lucide="printer" class="h-4 w-4 shrink-0"></i> Laporan
-                    </a>
-                </div>
+                
+              
             </nav>
 
             <div class="shrink-0 px-3 py-3" style="border-top: 1px solid var(--border); background: rgba(8,14,31,0.9);">
@@ -732,6 +717,8 @@
         </div>
     </div>
 
+           <!-- Library SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
         lucide.createIcons();
 
@@ -751,6 +738,68 @@
                 document.body.classList.remove('sidebar-open');
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const SwalDark = Swal.mixin({
+                background: '#0f1729',
+                color: '#e8edf5',
+                confirmButtonColor: '#4f8eff',
+                cancelButtonColor: '#ef4444',
+            });
+
+            const deleteForms = document.querySelectorAll('form.form-delete');
+
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); 
+                    const confirmMessage = form.getAttribute('data-confirm-message') || "Data yang dihapus tidak dapat dikembalikan!";
+
+                    SwalDark.fire({
+                        title: 'Yakin ingin menghapus?',
+                        text: confirmMessage,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal',
+                        position: 'center', // Paksa posisi tengah
+                        customClass: {
+                            popup: 'swal2-dark-popup'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); 
+                        }
+                    });
+                });
+            });
+        });
     </script>
+
+    <!-- CSS untuk memperbaiki posisi agar PASTI di tengah -->
+    <style>
+        .swal2-container {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            inset: 0 !important;
+        }
+        .swal2-dark-popup {
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+        }
+        .swal2-styled.swal2-confirm {
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+        }
+        .swal2-styled.swal2-cancel {
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+        }
+    </style>
 </body>
 </html>

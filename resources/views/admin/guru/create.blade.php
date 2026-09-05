@@ -74,9 +74,15 @@
                         <label class="block text-[11px] font-semibold mb-1.5" style="color: var(--text-secondary);">
                             No. HP
                         </label>
-                        <input type="text" name="no_hp" value="{{ old('no_hp') }}"
-                               class="input-dark w-full rounded-lg px-3.5 py-2.5 text-[12.5px]"
-                               placeholder="08123456789">
+                        <input type="tel"
+                            name="no_hp"
+                            value="{{ old('no_hp') }}"
+                            class="input-dark w-full rounded-lg px-3.5 py-2.5 text-[12.5px]"
+                            placeholder="08123456789"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            maxlength="15"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
                 </div>
             </div>

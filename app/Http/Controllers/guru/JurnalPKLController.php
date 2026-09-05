@@ -21,36 +21,87 @@ class JurnalPKLController extends Controller
         }
 
         $search = trim($request->input('search', ''));
+        $status = trim($request->input('status', ''));
 
         $jurnals = JurnalPKL::with('siswa')
             ->whereHas('siswa', function ($query) use ($guru) {
                 $query->where('guru_pembimbing_id', $guru->id);
             })
-            ->when($search !== '', function ($query) use ($search) {
-                $query->where(function ($q) use ($search) {
 
-                    // Cari berdasarkan nama siswa
-                    $q->whereHas('siswa', function ($siswaQuery) use ($search) {
-                        $siswaQuery->where('nama', 'like', '%' . $search . '%');
+            /*
+             * FILTER STATUS
+             */
+            ->when($status !== '', function ($query) use ($status) {
+
+                if ($status === 'Menunggu Review') {
+
+                    $query->where(function ($q) {
+                        $q->whereNull('status_jurnal')
+                            ->orWhere('status_jurnal', '')
+                            ->orWhereRaw(
+                                "LOWER(TRIM(status_jurnal)) IN (?, ?)",
+                                ['menunggu review', 'menunggu']
+                            );
                     });
 
-                    // Cari berdasarkan tanggal (contoh: 12-08-2026)
+                } else {
+
+                    $query->whereRaw(
+                        'LOWER(TRIM(status_jurnal)) = ?',
+                        [strtolower($status)]
+                    );
+                }
+            })
+
+            /*
+             * FILTER PENCARIAN
+             */
+            ->when($search !== '', function ($query) use ($search) {
+
+                $query->where(function ($q) use ($search) {
+
+                    /*
+                     * Cari nama siswa
+                     */
+                    $q->whereHas('siswa', function ($siswaQuery) use ($search) {
+                        $siswaQuery->where(function ($query) use ($search) {
+    $query->where('nama', 'like', '%' . $search . '%')
+          ->orWhere('nis', 'like', '%' . $search . '%');
+});
+                    });
+
+                    /*
+                     * Cari tanggal lengkap
+                     * Contoh: 12-08-2026
+                     */
                     $q->orWhereRaw(
                         "DATE_FORMAT(tanggal, '%d-%m-%Y') LIKE ?",
                         ['%' . $search . '%']
                     );
 
-                    // Cari berdasarkan tahun (contoh: 2026)
+                    /*
+                     * Cari tahun
+                     * Contoh: 2026
+                     */
                     if (preg_match('/^\d{4}$/', $search)) {
                         $q->orWhereYear('tanggal', $search);
                     }
 
-                    // Cari berdasarkan bulan angka (contoh: 8 atau 08)
-                    if (is_numeric($search) && (int) $search >= 1 && (int) $search <= 12) {
+                    /*
+                     * Cari bulan angka
+                     * Contoh: 8 atau 08
+                     */
+                    if (
+                        is_numeric($search) &&
+                        (int) $search >= 1 &&
+                        (int) $search <= 12
+                    ) {
                         $q->orWhereMonth('tanggal', (int) $search);
                     }
 
-                    // Cari berdasarkan nama bulan Indonesia
+                    /*
+                     * Cari nama bulan Indonesia
+                     */
                     $bulan = [
                         'januari' => 1,
                         'februari' => 2,
@@ -69,16 +120,23 @@ class JurnalPKLController extends Controller
                     $bulanKey = strtolower($search);
 
                     if (isset($bulan[$bulanKey])) {
-                        $q->orWhereMonth('tanggal', $bulan[$bulanKey]);
+                        $q->orWhereMonth(
+                            'tanggal',
+                            $bulan[$bulanKey]
+                        );
                     }
                 });
             })
+
             ->latest('tanggal')
             ->latest()
             ->paginate(10)
             ->withQueryString();
 
-        return view('guru.jurnal.index', compact('jurnals', 'search'));
+        return view(
+            'guru.jurnal.index',
+            compact('jurnals', 'search', 'status')
+        );
     }
 
     /**

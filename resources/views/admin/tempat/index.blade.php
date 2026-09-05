@@ -244,31 +244,27 @@
 
 
                             <form
-                                action="{{ route('admin.tempat.destroy', $tempat) }}"
-                                method="POST"
-                                onclick="event.stopPropagation()"
-                                onsubmit="return confirm('Yakin ingin menghapus {{ $tempat->nama_perusahaan }}?')"
-                            >
+    action="{{ route('admin.tempat.destroy', $tempat) }}"
+    method="POST"
+    class="form-delete"
+    data-confirm-message="Yakin ingin menghapus {{ $tempat->nama_perusahaan }}?"
+    onclick="event.stopPropagation()"
+>
+    @csrf
+    @method('DELETE')
 
-                                @csrf
-                                @method('DELETE')
-
-                                <button
-                                    type="submit"
-                                    onclick="event.stopPropagation()"
-                                    class="flex h-7 w-7 items-center justify-center rounded-md transition"
-                                    style="color: var(--text-dim);"
-                                    onmouseover="this.style.background='rgba(239,68,68,0.1)';this.style.color='#f87171'"
-                                    onmouseout="this.style.background='transparent';this.style.color='var(--text-dim)'"
-                                    title="Hapus"
-                                >
-                                    <i
-                                        data-lucide="trash-2"
-                                        class="h-3 w-3"
-                                    ></i>
-                                </button>
-
-                            </form>
+    <button
+        type="submit"
+        onclick="event.stopPropagation()"
+        class="flex h-7 w-7 items-center justify-center rounded-md transition"
+        style="color: var(--text-dim);"
+        onmouseover="this.style.background='rgba(239,68,68,0.1)';this.style.color='#f87171'"
+        onmouseout="this.style.background='transparent';this.style.color='var(--text-dim)'"
+        title="Hapus"
+    >
+        <i data-lucide="trash-2" class="h-3 w-3"></i>
+    </button>
+</form>
 
                         </div>
 

@@ -6,9 +6,6 @@ use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\TempatPklController;
 use App\Http\Controllers\Admin\PengajuanPklController;
-use App\Http\Controllers\Admin\JurnalPKLController;
-use App\Http\Controllers\Admin\PenilaianController;
-use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Siswa\PengajuanPklController as SiswaPengajuanPklController;
 use App\Http\Controllers\Siswa\JurnalPKLController as SiswaJurnalPKLController;
 use App\Http\Controllers\Siswa\PenilaianController as SiswaPenilaianController;
@@ -72,15 +69,7 @@ Route::resource('/tempat', TempatPklController::class);
 
         // Pengajuan PKL
         Route::resource('/pengajuan', PengajuanPklController::class);
-        Route::resource('/jurnal', JurnalPKLController::class);
-
-
-
-    Route::resource('/penilaian', PenilaianController::class);
-    Route::get('/laporan',[LaporanController::class,'index'])
-        ->name('laporan.index');
-    Route::get('/laporan/pdf',[LaporanController::class,'pdf'])
-        ->name('laporan.pdf');
+    
 });
 
 
@@ -199,6 +188,8 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
 
     Route::put('/jurnal/{id}', [SiswaJurnalPKLController::class, 'update'])
         ->name('jurnal.update');
+    Route::delete('/jurnal/{id}', [SiswaJurnalPKLController::class, 'destroy'])
+        ->name('jurnal.destroy');
     Route::get('/penilaian', [SiswaPenilaianController::class, 'index'])
         ->name('penilaian.index');
 

@@ -25,26 +25,188 @@
         </div>
     </div>
 
-    {{-- Pesan sukses --}}
-    @if(session('success'))
-        <div class="mb-6 rounded-xl border border-green-500/15 bg-green-500/5 px-5 py-4 text-green-400 text-sm">
-            {{ session('success') }}
-        </div>
-    @endif
 
     {{-- Daftar jurnal --}}
     <div class="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden">
 
+        {{-- Header --}}
         <div class="p-5 sm:p-6 border-b border-white/5">
-            <h2 class="text-base font-bold text-white">
-                Riwayat Jurnal
-            </h2>
 
-            <p class="text-xs text-slate-600 mt-1">
-                Semua jurnal PKL yang sudah kamu isi.
-            </p>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                <div>
+                    <h2 class="text-base font-bold text-white">
+                        Riwayat Jurnal
+                    </h2>
+
+                    <p class="text-xs text-slate-600 mt-1">
+                        Semua jurnal PKL yang sudah kamu isi.
+                    </p>
+                </div>
+
+                @if($jurnals->count() > 0)
+                    <div class="text-xs text-slate-500">
+                        {{ $jurnals->count() }} jurnal
+                    </div>
+                @endif
+
+            </div>
+
+
+            {{-- Pagination Bulan --}}
+            @if($bulanTersedia->count() > 0)
+
+                @php
+                    $bulanIndonesia = [
+                        1 => 'Januari',
+                        2 => 'Februari',
+                        3 => 'Maret',
+                        4 => 'April',
+                        5 => 'Mei',
+                        6 => 'Juni',
+                        7 => 'Juli',
+                        8 => 'Agustus',
+                        9 => 'September',
+                        10 => 'Oktober',
+                        11 => 'November',
+                        12 => 'Desember',
+                    ];
+
+                    $bulanAktifIndex = $bulanTersedia->search($bulan);
+
+                    $bulanSebelumnya = $bulanAktifIndex > 0
+                        ? $bulanTersedia[$bulanAktifIndex - 1]
+                        : null;
+
+                    $bulanBerikutnya = $bulanAktifIndex < $bulanTersedia->count() - 1
+                        ? $bulanTersedia[$bulanAktifIndex + 1]
+                        : null;
+                @endphp
+
+                <div class="mt-5">
+
+                    {{-- Navigasi bulan --}}
+                    <div class="flex items-center justify-between gap-3">
+
+                        {{-- Tombol sebelumnya --}}
+                        @if($bulanSebelumnya)
+                            <a href="{{ route('siswa.jurnal.index', ['bulan' => $bulanSebelumnya]) }}"
+                               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 bg-white/[0.03] text-slate-400 hover:bg-white/[0.06] hover:text-white transition"
+                               title="Bulan sebelumnya">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </a>
+                        @else
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/5 bg-white/[0.02] text-slate-700">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </span>
+                        @endif
+
+
+                        {{-- Nama bulan aktif --}}
+                        <div class="text-center flex-1">
+
+                            @php
+                                $tanggalBulanAktif = \Carbon\Carbon::createFromFormat('Y-m', $bulan);
+                            @endphp
+
+                            <h3 class="text-white font-bold text-base sm:text-lg">
+                                {{ $bulanIndonesia[(int) $tanggalBulanAktif->format('n')] }}
+                                {{ $tanggalBulanAktif->format('Y') }}
+                            </h3>
+
+                            <p class="text-[11px] text-slate-600 mt-1">
+                                Jurnal pada bulan ini
+                            </p>
+
+                        </div>
+
+
+                        {{-- Tombol berikutnya --}}
+                        @if($bulanBerikutnya)
+                            <a href="{{ route('siswa.jurnal.index', ['bulan' => $bulanBerikutnya]) }}"
+                               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 bg-white/[0.03] text-slate-400 hover:bg-white/[0.06] hover:text-white transition"
+                               title="Bulan berikutnya">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        @else
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/5 bg-white/[0.02] text-slate-700">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        @endif
+
+                    </div>
+
+
+                    {{-- Pilihan bulan --}}
+                    <div class="mt-4 flex gap-2 overflow-x-auto pb-1">
+
+                        @foreach($bulanTersedia as $bulanItem)
+
+                            @php
+                                $tanggalBulan = \Carbon\Carbon::createFromFormat('Y-m', $bulanItem);
+                                $isAktif = $bulanItem === $bulan;
+                            @endphp
+
+                            <a href="{{ route('siswa.jurnal.index', ['bulan' => $bulanItem]) }}"
+                               class="whitespace-nowrap px-4 py-2 rounded-xl text-xs font-semibold transition
+                               {{ $isAktif
+                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                                    : 'bg-white/[0.03] border border-white/5 text-slate-500 hover:text-white hover:bg-white/[0.06]'
+                               }}">
+
+                                {{ $bulanIndonesia[(int) $tanggalBulan->format('n')] }}
+                                {{ $tanggalBulan->format('Y') }}
+
+                            </a>
+
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            @endif
+
         </div>
 
+
+        {{-- Tabel --}}
         <div class="overflow-x-auto">
 
             <table class="w-full text-left min-w-[600px]">
@@ -79,87 +241,143 @@
                     </tr>
                 </thead>
 
+
                 <tbody class="divide-y divide-white/[0.03]">
 
                     @forelse($jurnals as $jurnal)
 
                         <tr class="hover:bg-white/[0.02] transition">
 
+                            {{-- NO --}}
                             <td class="px-6 py-4 text-slate-400 text-sm">
                                 {{ $loop->iteration }}
                             </td>
 
+
+                            {{-- TANGGAL --}}
                             <td class="px-6 py-4 text-white font-medium text-sm">
                                 {{ \Carbon\Carbon::parse($jurnal->tanggal)->format('d-m-Y') }}
                             </td>
 
+
+                            {{-- JAM --}}
                             <td class="px-6 py-4 text-slate-400 text-sm whitespace-nowrap">
                                 {{ $jurnal->jam_masuk }} - {{ $jurnal->jam_pulang }}
                             </td>
 
+
+                            {{-- KEGIATAN --}}
                             <td class="px-6 py-4">
+
                                 <p class="text-white text-sm font-medium max-w-xs truncate">
                                     {{ $jurnal->kegiatan }}
                                 </p>
+
                             </td>
 
+
+                            {{-- STATUS --}}
                             <td class="px-6 py-4">
 
                                 @if($jurnal->status_jurnal === 'Menunggu Review')
 
                                     <span class="inline-flex items-center gap-1.5 rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400 border border-yellow-500/15">
+
                                         <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+
                                         Menunggu Review
+
                                     </span>
 
                                 @elseif($jurnal->status_jurnal === 'Disetujui')
 
                                     <span class="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-400 border border-green-500/15">
+
                                         <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+
                                         Disetujui
+
                                     </span>
 
                                 @else
 
                                     <span class="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-400 border border-red-500/15">
+
                                         <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+
                                         Perlu Revisi
+
                                     </span>
 
                                 @endif
 
                             </td>
 
-                            {{-- AKSI EDIT --}}
+
+                            {{-- AKSI --}}
                             <td class="px-6 py-4">
 
-                                @if($jurnal->status_jurnal === 'Perlu Revisi')
+                                <div class="flex items-center gap-2">
 
-                                    <a href="{{ route('siswa.jurnal.edit', $jurnal->id_jurnal) }}"
-                                       class="inline-flex items-center gap-2 rounded-lg bg-yellow-500/10 border border-yellow-500/15 px-4 py-2 text-xs font-semibold text-yellow-400 hover:bg-yellow-500/20 transition">
+                                    {{-- EDIT --}}
+                                    @if($jurnal->status_jurnal === 'Perlu Revisi')
 
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="w-3.5 h-3.5"
-                                             fill="none"
-                                             viewBox="0 0 24 24"
-                                             stroke="currentColor">
+                                        <a href="{{ route('siswa.jurnal.edit', $jurnal->id_jurnal) }}"
+                                           class="inline-flex items-center gap-2 rounded-lg bg-yellow-500/10 border border-yellow-500/15 px-4 py-2 text-xs font-semibold text-yellow-400 hover:bg-yellow-500/20 transition">
 
-                                            <path stroke-linecap="round"
-                                                  stroke-linejoin="round"
-                                                  stroke-width="2"
-                                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="w-3.5 h-3.5"
+                                                 fill="none"
+                                                 viewBox="0 0 24 24"
+                                                 stroke="currentColor">
 
-                                        </svg>
+                                                <path stroke-linecap="round"
+                                                      stroke-linejoin="round"
+                                                      stroke-width="2"
+                                                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
 
-                                        Edit
+                                            </svg>
 
-                                    </a>
+                                            Edit
 
-                                @else
+                                        </a>
 
-                                    <span class="text-sm text-slate-700">-</span>
+                                    @endif
 
-                                @endif
+
+                                    {{-- HAPUS --}}
+                                    <form action="{{ route('siswa.jurnal.destroy', $jurnal->id_jurnal) }}"
+                                          method="POST"
+                                          class="form-delete"
+                                          data-confirm-message="Yakin ingin menghapus jurnal ini? Jurnal yang dihapus tidak dapat dikembalikan.">
+
+                                        @csrf
+
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                                class="inline-flex items-center gap-2 rounded-lg bg-red-500/10 border border-red-500/15 px-4 py-2 text-xs font-semibold text-red-400 hover:bg-red-500/20 transition">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="w-3.5 h-3.5"
+                                                 fill="none"
+                                                 viewBox="0 0 24 24"
+                                                 stroke="currentColor">
+
+                                                <path stroke-linecap="round"
+                                                      stroke-linejoin="round"
+                                                      stroke-width="2"
+                                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-3a1 1 0 00-1 1v3M4 7h16"/>
+
+                                            </svg>
+
+                                            Hapus
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
 
                             </td>
 
@@ -194,7 +412,7 @@
                                     </p>
 
                                     <p class="text-slate-600 text-xs mt-1">
-                                        Mulai isi jurnal kegiatan PKL kamu.
+                                        Belum ada jurnal pada bulan ini.
                                     </p>
 
                                 </div>

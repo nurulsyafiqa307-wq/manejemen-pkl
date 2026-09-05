@@ -22,9 +22,10 @@ class PenilaianController extends Controller
         }
 
         $siswas = Siswa::where('guru_pembimbing_id', $guru->id)
-            ->with('penilaian')
-            ->orderBy('nama')
-            ->get();
+    ->with('penilaian')
+    ->orderBy('nama')
+    ->paginate(9)
+    ->withQueryString();
 
         return view('guru.penilaian.index', compact('siswas'));
     }

@@ -58,7 +58,7 @@ class SiswaController extends Controller
             'nis' => 'required|string|max:50|unique:siswas,nis',
             'kelas' => 'required|string|max:50',
             'jurusan' => 'required|string|max:100',
-            'no_hp' => 'nullable|string|max:20',
+            'no_hp' => 'nullable|digits_between:10,15',
         ]);
 
         DB::transaction(function () use ($validated) {
@@ -118,7 +118,7 @@ class SiswaController extends Controller
             'nis' => 'required|string|max:50|unique:siswas,nis,' . $siswa->id,
             'kelas' => 'required|string|max:50',
             'jurusan' => 'required|string|max:100',
-            'no_hp' => 'nullable|string|max:20',
+            'no_hp' => 'nullable|digits_between:10,15',
             'password' => 'nullable|string|min:8',
         ]);
 

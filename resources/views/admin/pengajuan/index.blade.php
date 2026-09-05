@@ -434,33 +434,29 @@
                                                 class="h-3.5 w-3.5"
                                             ></i>
                                         </a>
-
-
-                                        {{-- Hapus --}}
                                         <form
-                                            action="{{ route('admin.pengajuan.destroy', $pengajuan) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus pengajuan ini?')"
-                                        >
+    action="{{ route('admin.pengajuan.destroy', $pengajuan) }}"
+    method="POST"
+    class="form-delete"
+    data-confirm-message="Yakin ingin menghapus pengajuan ini?"
+>
+    @csrf
+    @method('DELETE')
 
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button
-                                                type="submit"
-                                                class="flex h-7 w-7 items-center justify-center rounded-md transition"
-                                                style="background: rgba(239,68,68,0.08); color: #f87171;"
-                                                onmouseenter="this.style.background='rgba(239,68,68,0.15)'"
-                                                onmouseleave="this.style.background='rgba(239,68,68,0.08)'"
-                                                title="Hapus"
-                                            >
-                                                <i
-                                                    data-lucide="trash-2"
-                                                    class="h-3.5 w-3.5"
-                                                ></i>
-                                            </button>
-
-                                        </form>
+    <button
+        type="submit"
+        class="flex h-7 w-7 items-center justify-center rounded-md transition"
+        style="background: rgba(239,68,68,0.08); color: #f87171;"
+        onmouseenter="this.style.background='rgba(239,68,68,0.15)'"
+        onmouseleave="this.style.background='rgba(239,68,68,0.08)'"
+        title="Hapus"
+    >
+        <i
+            data-lucide="trash-2"
+            class="h-3.5 w-3.5"
+        ></i>
+    </button>
+</form>
 
                                     </div>
 

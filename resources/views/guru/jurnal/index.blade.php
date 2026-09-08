@@ -6,19 +6,19 @@
 
     <x-slot name="header">
         <div class="flex items-center gap-3">
-            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 border border-indigo-500/20">
-                <svg class="h-4 w-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 border border-indigo-100">
+                <svg class="h-4 w-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                 </svg>
             </div>
 
             <div>
-                <h2 class="text-sm lg:text-base font-bold text-white" translate="no">
+                <h2 class="text-sm lg:text-base font-bold text-slate-800" translate="no">
                     Jurnal PKL
                 </h2>
 
-                <p class="text-xs text-slate-400 hidden sm:block">
+                <p class="text-xs text-slate-500 hidden sm:block">
                     Jurnal harian siswa yang Anda bimbing
                 </p>
             </div>
@@ -28,19 +28,19 @@
     {{-- HEADER KONTEN --}}
     <div class="mb-6 flex items-center justify-between">
         <div class="flex items-center gap-4">
-            <div class="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-500/10 border border-indigo-500/20 shadow-inner">
-                <svg class="h-6 w-6 text-indigo-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <div class="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 border border-indigo-100 shadow-sm">
+                <svg class="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                 </svg>
             </div>
 
             <div>
-                <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                     Monitoring Jurnal PKL
                 </h1>
 
-                <p class="text-slate-400 mt-0.5 text-xs sm:text-sm">
+                <p class="text-slate-500 mt-0.5 text-xs sm:text-sm">
                     Tinjau dan berikan ulasan pada aktivitas harian siswa bimbingan.
                 </p>
             </div>
@@ -49,13 +49,13 @@
 
     {{-- PESAN SUKSES --}}
     @if(session('success'))
-        <div class="mb-6 flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3.5">
-            <svg class="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="mb-6 flex items-start gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3.5">
+            <svg class="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
 
-            <p class="text-emerald-300 text-sm font-medium">
+            <p class="text-emerald-800 text-sm font-medium">
                 {{ session('success') }}
             </p>
         </div>
@@ -63,23 +63,23 @@
 
     {{-- PESAN ERROR --}}
     @if(session('error'))
-        <div class="mb-6 flex items-start gap-3 rounded-xl border border-rose-500/20 bg-rose-500/10 px-4 py-3.5">
-            <svg class="h-5 w-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="mb-6 flex items-start gap-3 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3.5">
+            <svg class="h-5 w-5 text-rose-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
             </svg>
 
-            <p class="text-rose-300 text-sm font-medium">
+            <p class="text-rose-800 text-sm font-medium">
                 {{ session('error') }}
             </p>
         </div>
     @endif
 
     {{-- MAIN CONTAINER --}}
-    <div class="rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl shadow-xl overflow-hidden">
+    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
 
-        {{-- BAR PENCARIAN & FILTER --}}
-<div class="p-4 sm:p-5 border-b border-slate-800/80 bg-slate-900/40">
+       {{-- BAR PENCARIAN & FILTER --}}
+<div class="p-4 sm:p-5 border-b border-slate-200 bg-slate-50">
     <form method="GET" action="{{ route('guru.jurnal.index') }}">
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_210px_auto] gap-3">
 
@@ -101,7 +101,8 @@
                     name="search"
                     value="{{ $search ?? '' }}"
                     placeholder="Cari nama siswa, NIS, atau tanggal..."
-                    class="w-full rounded-xl border border-slate-700/60 bg-slate-950/50 pl-10 pr-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all duration-200"
+                    style="background-color: #ffffff !important; color: #1e293b !important; border-color: #cbd5e1 !important;"
+                    class="w-full rounded-xl border pl-10 pr-4 py-2.5 text-sm placeholder:text-slate-400 focus:outline-none shadow-sm"
                 >
             </div>
 
@@ -109,7 +110,8 @@
             <div class="min-w-0">
                 <select
                     name="status"
-                    class="w-full rounded-xl border border-slate-700/60 bg-slate-950/50 px-4 py-2.5 text-sm text-slate-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all duration-200"
+                    style="background-color: #ffffff !important; color: #1e293b !important; border-color: #cbd5e1 !important;"
+                    class="w-full rounded-xl border px-4 py-2.5 text-sm focus:outline-none shadow-sm cursor-pointer"
                 >
                     <option value="" {{ ($status ?? '') === '' ? 'selected' : '' }}>
                         Semua Jurnal
@@ -133,7 +135,8 @@
             <div class="flex flex-col sm:flex-row lg:flex-row gap-2">
                 <button
                     type="submit"
-                    class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-600/20 hover:bg-indigo-500 active:scale-[0.98] transition-all duration-150"
+                    style="background-color: #4f46e5 !important; color: #ffffff !important;"
+                    class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold shadow-sm hover:opacity-90 transition-all duration-150"
                 >
                     <svg
                         class="w-4 h-4"
@@ -152,7 +155,8 @@
                 @if(($search ?? '') !== '' || ($status ?? '') !== '')
                     <a
                         href="{{ route('guru.jurnal.index') }}"
-                        class="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-2.5 text-sm font-semibold text-slate-300 hover:bg-slate-700 hover:text-white active:scale-[0.98] transition-all duration-150"
+                        style="background-color: #ffffff !important; color: #475569 !important; border-color: #cbd5e1 !important;"
+                        class="inline-flex w-full sm:w-auto items-center justify-center rounded-xl border px-4 py-2.5 text-sm font-semibold hover:bg-slate-100 transition-all duration-150 shadow-sm"
                     >
                         Reset
                     </a>
@@ -164,14 +168,14 @@
 </div>
 
         {{-- SUB-HEADER DATA --}}
-        <div class="px-5 py-3.5 border-b border-slate-800/60 bg-slate-900/20 flex flex-wrap items-center justify-between gap-2">
+        <div class="px-5 py-3 border-b border-slate-200 bg-slate-50/30 flex flex-wrap items-center justify-between gap-2">
 
             <div>
-                <span class="text-xs font-medium text-slate-400">
+                <span class="text-xs font-medium text-slate-500">
                     Total data ditemukan:
                 </span>
 
-                <span class="text-xs font-bold text-indigo-400 ml-1">
+                <span class="text-xs font-bold text-indigo-600 ml-1">
                     {{ $jurnals->total() ?? $jurnals->count() }} Jurnal
                 </span>
             </div>
@@ -179,20 +183,20 @@
             <div class="flex flex-wrap gap-2">
 
                 @if($search ?? false)
-                    <div class="inline-flex items-center gap-1.5 rounded-md bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 text-xs">
-                        <span class="text-slate-400">Pencarian:</span>
+                    <div class="inline-flex items-center gap-1.5 rounded-md bg-indigo-50 border border-indigo-200 px-2.5 py-1 text-xs">
+                        <span class="text-slate-500">Pencarian:</span>
 
-                        <span class="text-indigo-300 font-medium truncate max-w-[150px]">
+                        <span class="text-indigo-700 font-medium truncate max-w-[150px]">
                             "{{ $search }}"
                         </span>
                     </div>
                 @endif
 
                 @if($status ?? false)
-                    <div class="inline-flex items-center gap-1.5 rounded-md bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 text-xs">
-                        <span class="text-slate-400">Status:</span>
+                    <div class="inline-flex items-center gap-1.5 rounded-md bg-indigo-50 border border-indigo-200 px-2.5 py-1 text-xs">
+                        <span class="text-slate-500">Status:</span>
 
-                        <span class="text-indigo-300 font-medium">
+                        <span class="text-indigo-700 font-medium">
                             {{ $status }}
                         </span>
                     </div>
@@ -210,7 +214,7 @@
                 <table class="w-full text-sm text-left border-collapse">
 
                     <thead>
-                        <tr class="border-b border-slate-800 bg-slate-900/80 text-slate-400">
+                        <tr class="border-b border-slate-200 bg-slate-50/80 text-slate-500">
 
                             <th class="px-6 py-3.5 text-[11px] uppercase tracking-wider font-semibold" translate="no">
                                 Siswa
@@ -239,29 +243,29 @@
                         </tr>
                     </thead>
 
-                    <tbody class="divide-y divide-slate-800/60">
+                    <tbody class="divide-y divide-slate-100">
 
                         @foreach($jurnals as $jurnal)
 
-                            <tr class="hover:bg-slate-800/40 transition-colors duration-150">
+                            <tr class="hover:bg-slate-50/80 transition-colors duration-150">
 
                                 {{-- SISWA --}}
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
 
-                                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-500/15 border border-indigo-500/30 text-xs font-bold text-indigo-300">
+                                        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-50 border border-indigo-100 text-xs font-bold text-indigo-600">
                                             {{ strtoupper(substr($jurnal->siswa->nama ?? '-', 0, 1)) }}
                                         </div>
 
                                         <div class="min-w-0">
 
-                                            <p class="font-medium text-slate-100 truncate max-w-[180px]">
+                                            <p class="font-medium text-slate-900 truncate max-w-[180px]">
                                                 {{ $jurnal->siswa->nama ?? '-' }}
                                             </p>
 
-                                            <p class="text-xs text-slate-400 mt-0.5">
+                                            <p class="text-xs text-slate-500 mt-0.5">
                                                 NIS:
-                                                <span class="text-slate-300 font-mono">
+                                                <span class="text-slate-700 font-mono">
                                                     {{ $jurnal->siswa->nis ?? '-' }}
                                                 </span>
                                             </p>
@@ -272,7 +276,7 @@
 
                                 {{-- TANGGAL --}}
                                 <td class="px-6 py-4 whitespace-nowrap" translate="no">
-                                    <span class="inline-flex items-center gap-1.5 text-slate-300 font-mono text-xs">
+                                    <span class="inline-flex items-center gap-1.5 text-slate-600 font-mono text-xs">
 
                                         <svg class="w-3.5 h-3.5 text-slate-400 shrink-0"
                                             fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -287,9 +291,9 @@
 
                                 {{-- JAM --}}
                                 <td class="px-6 py-4 whitespace-nowrap" translate="no">
-                                    <span class="inline-flex items-center gap-1.5 rounded-md bg-slate-950/60 border border-slate-800 px-2.5 py-1 text-xs text-slate-300 font-mono">
+                                    <span class="inline-flex items-center gap-1.5 rounded-md bg-slate-100 border border-slate-200 px-2.5 py-1 text-xs text-slate-700 font-mono">
 
-                                        <svg class="w-3 h-3 text-slate-400 shrink-0"
+                                        <svg class="w-3 h-3 text-slate-500 shrink-0"
                                             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -303,7 +307,7 @@
                                 {{-- KEGIATAN --}}
                                 <td class="px-6 py-4">
                                     <p
-                                        class="text-slate-300 max-w-[220px] xl:max-w-xs text-xs leading-relaxed line-clamp-2"
+                                        class="text-slate-600 max-w-[220px] xl:max-w-xs text-xs leading-relaxed line-clamp-2"
                                         title="{{ $jurnal->kegiatan }}"
                                     >
                                         {{ $jurnal->kegiatan }}
@@ -315,22 +319,22 @@
 
                                     @if($jurnal->status_jurnal === 'Disetujui')
 
-                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 text-xs font-medium text-emerald-400">
-                                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-1 text-xs font-medium text-emerald-700">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                                             Disetujui
                                         </span>
 
                                     @elseif($jurnal->status_jurnal === 'Perlu Revisi')
 
-                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 text-xs font-medium text-rose-400">
-                                            <span class="h-1.5 w-1.5 rounded-full bg-rose-400"></span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 border border-rose-200 px-2.5 py-1 text-xs font-medium text-rose-700">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
                                             Perlu Revisi
                                         </span>
 
                                     @else
 
-                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 text-xs font-medium text-amber-400">
-                                            <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-1 text-xs font-medium text-amber-700">
+                                            <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
                                             Menunggu Review
                                         </span>
 
@@ -343,7 +347,7 @@
 
                                     <a
                                         href="{{ route('guru.jurnal.show', $jurnal->id_jurnal) }}"
-                                        class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 text-xs font-medium text-indigo-300 hover:bg-indigo-600 hover:text-white transition-all duration-150"
+                                        class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-50 border border-indigo-200 px-3 py-1.5 text-xs font-medium text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-150"
                                     >
 
                                         <svg class="w-3.5 h-3.5"
@@ -370,7 +374,7 @@
             </div>
 
             {{-- TAMPILAN MOBILE --}}
-            <div class="md:hidden divide-y divide-slate-800/60">
+            <div class="md:hidden divide-y divide-slate-100">
 
                 @foreach($jurnals as $jurnal)
 
@@ -380,19 +384,19 @@
 
                             <div class="flex items-center gap-3 min-w-0">
 
-                                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-500/15 border border-indigo-500/30 text-xs font-bold text-indigo-300">
+                                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-50 border border-indigo-100 text-xs font-bold text-indigo-600">
                                     {{ strtoupper(substr($jurnal->siswa->nama ?? '-', 0, 1)) }}
                                 </div>
 
                                 <div class="min-w-0">
 
-                                    <h3 class="text-sm font-medium text-slate-100 truncate">
+                                    <h3 class="text-sm font-medium text-slate-900 truncate">
                                         {{ $jurnal->siswa->nama ?? '-' }}
                                     </h3>
 
-                                    <p class="text-xs text-slate-400 mt-0.5">
+                                    <p class="text-xs text-slate-500 mt-0.5">
                                         NIS:
-                                        <span class="text-slate-300 font-mono">
+                                        <span class="text-slate-700 font-mono">
                                             {{ $jurnal->siswa->nis ?? '-' }}
                                         </span>
                                     </p>
@@ -402,19 +406,19 @@
 
                             @if($jurnal->status_jurnal === 'Disetujui')
 
-                                <span class="shrink-0 inline-flex items-center gap-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[11px] font-medium text-emerald-400">
+                                <span class="shrink-0 inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-medium text-emerald-700">
                                     Disetujui
                                 </span>
 
                             @elseif($jurnal->status_jurnal === 'Perlu Revisi')
 
-                                <span class="shrink-0 inline-flex items-center gap-1 rounded-full bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 text-[11px] font-medium text-rose-400">
+                                <span class="shrink-0 inline-flex items-center gap-1 rounded-full bg-rose-50 border border-rose-200 px-2 py-0.5 text-[11px] font-medium text-rose-700">
                                     Perlu Revisi
                                 </span>
 
                             @else
 
-                                <span class="shrink-0 inline-flex items-center gap-1 rounded-full bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 text-[11px] font-medium text-amber-400">
+                                <span class="shrink-0 inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200 px-2 py-0.5 text-[11px] font-medium text-amber-700">
                                     Menunggu Review
                                 </span>
 
@@ -422,20 +426,20 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-slate-950/40 border border-slate-800/60 p-3 space-y-2 text-xs" translate="no">
+                        <div class="rounded-lg bg-slate-50 border border-slate-200 p-3 space-y-2 text-xs" translate="no">
 
                             <div class="flex justify-between">
-                                <span class="text-slate-400">Tanggal</span>
+                                <span class="text-slate-500">Tanggal</span>
 
-                                <span class="text-slate-200 font-mono">
+                                <span class="text-slate-800 font-mono">
                                     {{ \Carbon\Carbon::parse($jurnal->tanggal)->format('d-m-Y') }}
                                 </span>
                             </div>
 
                             <div class="flex justify-between">
-                                <span class="text-slate-400">Jam Kerja</span>
+                                <span class="text-slate-500">Jam Kerja</span>
 
-                                <span class="text-slate-200 font-mono">
+                                <span class="text-slate-800 font-mono">
                                     {{ $jurnal->jam_masuk }} - {{ $jurnal->jam_pulang }}
                                 </span>
                             </div>
@@ -444,11 +448,11 @@
 
                         <div>
 
-                            <p class="text-[11px] text-slate-400 mb-1">
+                            <p class="text-[11px] text-slate-500 mb-1">
                                 Kegiatan:
                             </p>
 
-                            <p class="text-xs text-slate-300 leading-relaxed bg-slate-950/20 p-2.5 rounded-lg border border-slate-800/40">
+                            <p class="text-xs text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-200">
                                 {{ $jurnal->kegiatan }}
                             </p>
 
@@ -456,13 +460,13 @@
 
                         <a
                             href="{{ route('guru.jurnal.show', $jurnal->id_jurnal) }}"
-                            class="inline-flex items-center justify-center gap-1.5 w-full rounded-lg bg-indigo-500/10 border border-indigo-500/20 px-4 py-2 text-xs font-semibold text-indigo-300 hover:bg-indigo-600 hover:text-white transition-all duration-150"
+                            class="inline-flex items-center justify-center gap-1.5 w-full rounded-lg bg-indigo-50 border border-indigo-200 px-4 py-2 text-xs font-semibold text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-150"
                         >
 
                             <svg class="w-3.5 h-3.5"
                                 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573 3.007-9.963 7.178z" />
+                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
 
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -481,7 +485,7 @@
             {{-- PAGINATION --}}
             @if($jurnals->hasPages())
 
-                <div class="px-5 py-4 border-t border-slate-800">
+                <div class="px-5 py-4 border-t border-slate-200">
                     {{ $jurnals->onEachSide(1)->links() }}
                 </div>
 
@@ -492,7 +496,7 @@
             {{-- DATA KOSONG --}}
             <div class="px-6 py-16 text-center">
 
-                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-800/60 border border-slate-700/50">
+                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 border border-slate-200">
 
                     <svg class="h-7 w-7 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -503,11 +507,11 @@
 
                 @if(($search ?? false) || ($status ?? false))
 
-                    <p class="font-semibold text-slate-200 text-sm">
+                    <p class="font-semibold text-slate-800 text-sm">
                         Jurnal Tidak Ditemukan
                     </p>
 
-                    <p class="mt-1 text-xs text-slate-400 max-w-xs mx-auto">
+                    <p class="mt-1 text-xs text-slate-500 max-w-xs mx-auto">
 
                         @if($search ?? false)
                             Tidak ada catatan jurnal yang cocok dengan kata kunci "{{ $search }}".
@@ -519,18 +523,18 @@
 
                     <a
                         href="{{ route('guru.jurnal.index') }}"
-                        class="inline-flex items-center gap-2 mt-4 rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md hover:bg-indigo-500 transition-all duration-150"
+                        class="inline-flex items-center gap-2 mt-4 rounded-xl bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-700 transition-all duration-150"
                     >
                         Reset Pencarian
                     </a>
 
                 @else
 
-                    <p class="font-semibold text-slate-200 text-sm">
+                    <p class="font-semibold text-slate-800 text-sm">
                         Belum Ada Jurnal
                     </p>
 
-                    <p class="mt-1 text-xs text-slate-400 max-w-xs mx-auto">
+                    <p class="mt-1 text-xs text-slate-500 max-w-xs mx-auto">
                         Siswa bimbingan Anda belum mengirimkan laporan jurnal PKL.
                     </p>
 

@@ -4,10 +4,10 @@
 
     <x-slot:header>
         <div>
-            <h2 class="text-[14px] lg:text-[15px] font-bold text-white">
+            <h2 class="text-[14px] lg:text-[15px] font-bold text-slate-800">
                 Edit Penilaian
             </h2>
-            <p class="text-[11px] hidden sm:block" style="color: var(--text-muted);">
+            <p class="text-[11px] hidden sm:block text-slate-500">
                 Perbarui penilaian siswa
             </p>
         </div>
@@ -16,19 +16,19 @@
 
     <div class="max-w-3xl mx-auto">
 
-        <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-5 sm:p-7">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 shadow-sm">
 
-            <div class="mb-7">
+            <div class="mb-7 pb-5 border-b border-slate-100">
 
-                <p class="text-[10px] uppercase tracking-wider font-bold text-indigo-400">
+                <p class="text-[10px] uppercase tracking-wider font-bold text-indigo-600">
                     Siswa PKL
                 </p>
 
-                <h1 class="text-xl font-bold text-white mt-1">
+                <h1 class="text-xl font-bold text-slate-900 mt-1">
                     {{ $penilaian->siswa->nama }}
                 </h1>
 
-                <p class="text-xs text-slate-500 mt-1">
+                <p class="text-xs text-slate-500 mt-1 font-mono">
                     NIS: {{ $penilaian->siswa->nis ?? '-' }}
                 </p>
 
@@ -60,7 +60,7 @@
 
                     <div>
 
-                        <label class="block text-xs font-semibold text-slate-300 mb-2">
+                        <label class="block text-xs font-semibold text-slate-700 mb-2">
                             {{ $label }}
                         </label>
 
@@ -71,14 +71,12 @@
                             max="100"
                             value="{{ old($field, $penilaian->$field) }}"
                             required
-                            class="w-full rounded-xl bg-white/[0.03]
-                                border border-white/10
-                                px-4 py-3 text-sm text-white
-                                outline-none focus:border-indigo-500"
+                            style="background-color: #f8fafc !important; color: #0f172a !important;"
+                            class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm placeholder-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                         >
 
                         @error($field)
-                            <p class="text-xs text-red-400 mt-1">
+                            <p class="text-xs text-rose-500 mt-1 font-medium">
                                 {{ $message }}
                             </p>
                         @enderror
@@ -90,17 +88,15 @@
 
                 <div>
 
-                    <label class="block text-xs font-semibold text-slate-300 mb-2">
+                    <label class="block text-xs font-semibold text-slate-700 mb-2">
                         Catatan Guru
                     </label>
 
                     <textarea
                         name="catatan"
                         rows="5"
-                        class="w-full rounded-xl bg-white/[0.03]
-                            border border-white/10
-                            px-4 py-3 text-sm text-white
-                            outline-none focus:border-indigo-500"
+                        style="background-color: #f8fafc !important; color: #0f172a !important;"
+                        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm placeholder-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
                     >{{ old('catatan', $penilaian->catatan) }}</textarea>
 
                 </div>
@@ -110,18 +106,14 @@
 
                     <a
                         href="{{ route('guru.penilaian.show', $penilaian->id) }}"
-                        class="rounded-xl border border-white/10
-                            px-5 py-3 text-sm font-semibold
-                            text-slate-300 hover:bg-white/5 transition"
+                        class="rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-indigo-600 shadow-sm transition-all duration-200"
                     >
                         Batal
                     </a>
 
                     <button
                         type="submit"
-                        class="rounded-xl bg-indigo-600
-                            px-5 py-3 text-sm font-semibold
-                            text-white hover:bg-indigo-500 transition"
+                        class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700 shadow-sm active:scale-[0.98] transition-all duration-200"
                     >
                         Simpan Perubahan
                     </button>

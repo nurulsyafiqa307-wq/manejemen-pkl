@@ -6,33 +6,27 @@
 
     {{-- HEADER --}}
     <div class="mb-8">
-
-        <h1 class="text-2xl sm:text-3xl font-extrabold header-title tracking-tight">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Penilaian Siswa
         </h1>
 
         <p class="text-slate-500 mt-2 text-sm">
             Penilaian siswa selama melaksanakan PKL
         </p>
-
     </div>
 
     {{-- PESAN SUKSES --}}
     @if(session('success'))
-
-        <div class="mb-6 rounded-xl border border-green-500/15 bg-green-500/5 px-5 py-4 text-green-400 text-sm">
+        <div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-800 text-sm font-medium shadow-sm">
             {{ session('success') }}
         </div>
-
     @endif
 
     {{-- PESAN ERROR --}}
     @if(session('error'))
-
-        <div class="mb-6 rounded-xl border border-red-500/15 bg-red-500/5 px-5 py-4 text-red-400 text-sm">
+        <div class="mb-6 rounded-xl border border-rose-200 bg-rose-50 px-5 py-4 text-rose-800 text-sm font-medium shadow-sm">
             {{ session('error') }}
         </div>
-
     @endif
 
     {{-- DAFTAR SISWA --}}
@@ -40,39 +34,37 @@
 
         @forelse($siswas as $siswa)
 
-            <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-5 hover:bg-white/[0.04] transition">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:border-slate-300 hover:shadow-md transition-all duration-200">
 
                 {{-- DATA SISWA --}}
                 <div class="flex items-start justify-between gap-4">
 
                     <div class="min-w-0">
-
-                        <h3 class="text-white font-semibold truncate">
+                        <h3 class="text-slate-900 font-bold text-base truncate">
                             {{ $siswa->nama }}
                         </h3>
 
-                        <p class="text-xs text-slate-500 mt-1">
+                        <p class="text-xs text-slate-500 mt-1 font-mono">
                             NIS: {{ $siswa->nis ?? '-' }}
                         </p>
 
-                        <p class="text-xs text-slate-500">
+                        <p class="text-xs text-slate-500 mt-0.5 font-medium">
                             {{ $siswa->kelas ?? '-' }}
-                            •
+                            <span class="mx-1 text-slate-300">•</span>
                             {{ $siswa->jurusan ?? '-' }}
                         </p>
-
                     </div>
 
                     {{-- STATUS --}}
                     @if($siswa->penilaian)
 
                         <span class="shrink-0 inline-flex items-center gap-1.5
-                            rounded-full bg-emerald-500/10
-                            border border-emerald-500/15
+                            rounded-full bg-emerald-50
+                            border border-emerald-200
                             px-3 py-1.5 text-[11px]
-                            font-semibold text-emerald-400">
+                            font-semibold text-emerald-700">
 
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
 
                             Sudah Dinilai
 
@@ -81,12 +73,12 @@
                     @else
 
                         <span class="shrink-0 inline-flex items-center gap-1.5
-                            rounded-full bg-amber-500/10
-                            border border-amber-500/15
+                            rounded-full bg-amber-50
+                            border border-amber-200
                             px-3 py-1.5 text-[11px]
-                            font-semibold text-amber-400">
+                            font-semibold text-amber-700">
 
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
 
                             Belum Dinilai
 
@@ -112,42 +104,38 @@
                                     : ($r >= 60 ? 'D' : 'E')));
 
                         $gradeColor = $r >= 90
-                            ? 'from-emerald-400 to-emerald-600'
+                            ? 'from-emerald-600 to-emerald-800'
                             : ($r >= 80
-                                ? 'from-blue-400 to-indigo-600'
+                                ? 'from-blue-600 to-indigo-800'
                                 : ($r >= 70
-                                    ? 'from-yellow-400 to-amber-600'
-                                    : 'from-red-400 to-red-600'));
+                                    ? 'from-amber-500 to-amber-700'
+                                    : 'from-rose-600 to-rose-800'));
                     @endphp
 
-                    <div class="mt-5 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                    <div class="mt-5 p-4 rounded-xl bg-slate-50/80 border border-slate-200/80">
 
                         <div class="flex items-center justify-between gap-4">
 
                             {{-- NILAI RATA-RATA --}}
                             <div>
-
-                                <p class="text-[10px] uppercase tracking-wider font-bold text-slate-500">
+                                <p class="text-[10px] uppercase tracking-wider font-bold text-slate-400">
                                     Rata-rata Nilai
                                 </p>
 
-                                <p class="text-2xl font-bold text-white mt-1">
+                                <p class="text-2xl font-extrabold text-slate-800 mt-0.5">
                                     {{ number_format($siswa->penilaian->rata_rata, 2) }}
                                 </p>
-
                             </div>
 
                             {{-- PREDIKAT --}}
                             <div class="text-center">
-
-                                <p class="text-[10px] uppercase tracking-wider font-bold text-slate-500 mb-1">
+                                <p class="text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-0.5">
                                     Predikat
                                 </p>
 
-                                <span class="text-4xl font-extrabold bg-gradient-to-br {{ $gradeColor }} bg-clip-text text-transparent leading-none">
+                                <span class="text-4xl font-black bg-gradient-to-br {{ $gradeColor }} bg-clip-text text-transparent leading-none">
                                     {{ $grade }}
                                 </span>
-
                             </div>
 
                             {{-- AKSI --}}
@@ -157,12 +145,12 @@
                                 <a
                                     href="{{ route('guru.penilaian.show', $siswa->penilaian->id) }}"
                                     class="inline-flex items-center rounded-lg
-                                        bg-indigo-500/10
-                                        border border-indigo-500/15
+                                        bg-indigo-50
+                                        border border-indigo-200
                                         px-3 py-2
-                                        text-xs font-semibold text-indigo-400
-                                        hover:bg-indigo-500/20
-                                        transition"
+                                        text-xs font-semibold text-indigo-700
+                                        hover:bg-indigo-100
+                                        transition-colors"
                                 >
                                     Lihat Detail
                                 </a>
@@ -171,39 +159,39 @@
                                 <a
                                     href="{{ route('guru.penilaian.edit', $siswa->penilaian->id) }}"
                                     class="inline-flex items-center rounded-lg
-                                        bg-yellow-500/10
-                                        border border-yellow-500/15
+                                        bg-amber-50
+                                        border border-amber-200
                                         px-3 py-2
-                                        text-xs font-semibold text-yellow-400
-                                        hover:bg-yellow-500/20
-                                        transition"
+                                        text-xs font-semibold text-amber-700
+                                        hover:bg-amber-100
+                                        transition-colors"
                                 >
                                     Edit
                                 </a>
 
                                 {{-- HAPUS --}}
-<form
-    action="{{ route('guru.penilaian.destroy', $siswa->penilaian->id) }}"
-    method="POST"
-    class="form-delete"
-    data-confirm-message="Yakin ingin menghapus penilaian siswa ini?"
->
-    @csrf
-    @method('DELETE')
+                                <form
+                                    action="{{ route('guru.penilaian.destroy', $siswa->penilaian->id) }}"
+                                    method="POST"
+                                    class="form-delete"
+                                    data-confirm-message="Yakin ingin menghapus penilaian siswa ini?"
+                                >
+                                    @csrf
+                                    @method('DELETE')
 
-    <button
-        type="submit"
-        class="inline-flex items-center rounded-lg
-            bg-red-500/10
-            border border-red-500/15
-            px-3 py-2
-            text-xs font-semibold text-red-400
-            hover:bg-red-500/20
-            transition"
-    >
-        Hapus
-    </button>
-</form>
+                                    <button
+                                        type="submit"
+                                        class="inline-flex items-center rounded-lg
+                                            bg-rose-50
+                                            border border-rose-200
+                                            px-3 py-2
+                                            text-xs font-semibold text-rose-700
+                                            hover:bg-rose-100
+                                            transition-colors"
+                                    >
+                                        Hapus
+                                    </button>
+                                </form>
 
                             </div>
 
@@ -215,19 +203,18 @@
                 @else
 
                     <div class="mt-5">
-
                         <a
                             href="{{ route('guru.penilaian.create', $siswa->id) }}"
                             class="inline-flex items-center gap-2 rounded-xl
                                 bg-indigo-600
                                 px-4 py-2.5
                                 text-xs font-semibold text-white
-                                hover:bg-indigo-500
-                                transition"
+                                hover:bg-indigo-700
+                                shadow-sm active:scale-[0.98]
+                                transition-all duration-200"
                         >
                             + Beri Penilaian
                         </a>
-
                     </div>
 
                 @endif
@@ -237,13 +224,13 @@
         @empty
 
             <div class="lg:col-span-2
-                bg-white/[0.02]
-                border border-white/5
+                bg-white
+                border border-slate-200
                 rounded-2xl
                 p-10
-                text-center">
+                text-center shadow-sm">
 
-                <p class="text-slate-400 text-sm">
+                <p class="text-slate-500 text-sm font-medium">
                     Belum ada siswa yang menjadi bimbingan Anda.
                 </p>
 
@@ -259,4 +246,5 @@
             {{ $siswas->onEachSide(1)->links() }}
         </div>
     @endif
+
 </x-guru-layout>

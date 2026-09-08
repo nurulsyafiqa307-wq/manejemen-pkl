@@ -4,10 +4,10 @@
 
     <x-slot:header>
         <div>
-            <h2 class="text-[14px] lg:text-[15px] font-bold text-white">
+            <h2 class="text-[14px] lg:text-[15px] font-bold text-slate-800">
                 Detail Penilaian
             </h2>
-            <p class="text-[11px] hidden sm:block" style="color: var(--text-muted);">
+            <p class="text-[11px] hidden sm:block text-slate-500">
                 Hasil penilaian siswa selama PKL
             </p>
         </div>
@@ -18,21 +18,21 @@
 
 
         {{-- IDENTITAS SISWA --}}
-        <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-5 sm:p-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
 
-            <p class="text-[10px] uppercase tracking-wider font-bold text-indigo-400">
+            <p class="text-[10px] uppercase tracking-wider font-bold text-indigo-600">
                 Siswa PKL
             </p>
 
-            <h1 class="text-xl font-bold text-white mt-1">
+            <h1 class="text-xl font-bold text-slate-900 mt-1">
                 {{ $penilaian->siswa->nama }}
             </h1>
 
-            <p class="text-xs text-slate-500 mt-1">
+            <p class="text-xs text-slate-500 mt-1 font-medium">
                 NIS: {{ $penilaian->siswa->nis ?? '-' }}
-                •
+                <span class="mx-1 text-slate-300">•</span>
                 {{ $penilaian->siswa->kelas ?? '-' }}
-                •
+                <span class="mx-1 text-slate-300">•</span>
                 {{ $penilaian->siswa->jurusan ?? '-' }}
             </p>
 
@@ -40,17 +40,17 @@
 
 
         {{-- RATA-RATA --}}
-        <div class="bg-indigo-600/10 border border-indigo-500/15 rounded-2xl p-6 text-center">
+        <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 text-center shadow-sm">
 
-            <p class="text-xs uppercase tracking-wider font-bold text-indigo-300">
+            <p class="text-xs uppercase tracking-wider font-bold text-indigo-600">
                 Nilai Rata-rata
             </p>
 
-            <p class="text-5xl font-bold text-white mt-2">
+            <p class="text-5xl font-extrabold text-indigo-950 mt-2">
                 {{ number_format($penilaian->rata_rata, 2) }}
             </p>
 
-            <p class="text-xs text-slate-400 mt-2">
+            <p class="text-xs text-indigo-500 mt-2 font-medium">
                 Dari 5 aspek penilaian
             </p>
 
@@ -58,9 +58,9 @@
 
 
         {{-- DETAIL NILAI --}}
-        <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-5 sm:p-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
 
-            <h2 class="text-base font-bold text-white mb-5">
+            <h2 class="text-base font-bold text-slate-800 mb-5">
                 Rincian Penilaian
             </h2>
 
@@ -84,20 +84,20 @@
 
                         <div class="flex justify-between mb-2">
 
-                            <span class="text-sm text-slate-300">
+                            <span class="text-sm font-medium text-slate-600">
                                 {{ $label }}
                             </span>
 
-                            <span class="text-sm font-bold text-white">
+                            <span class="text-sm font-bold text-slate-900">
                                 {{ $value }}
                             </span>
 
                         </div>
 
-                        <div class="h-2 rounded-full bg-white/5 overflow-hidden">
+                        <div class="h-2 rounded-full bg-slate-100 overflow-hidden">
 
                             <div
-                                class="h-full rounded-full bg-indigo-500"
+                                class="h-full rounded-full bg-indigo-600"
                                 style="width: {{ $value }}%"
                             ></div>
 
@@ -113,15 +113,15 @@
 
 
         {{-- CATATAN --}}
-        <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-5 sm:p-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
 
-            <h2 class="text-base font-bold text-white mb-3">
+            <h2 class="text-base font-bold text-slate-800 mb-3">
                 Catatan Guru
             </h2>
 
-            <div class="rounded-xl bg-white/[0.02] border border-white/5 p-4">
+            <div class="rounded-xl bg-slate-50 border border-slate-200/80 p-4">
 
-                <p class="text-sm text-slate-300 leading-7 whitespace-pre-line">
+                <p class="text-sm text-slate-700 leading-7 whitespace-pre-line">
                     {{ $penilaian->catatan ?: 'Tidak ada catatan.' }}
                 </p>
 
@@ -135,9 +135,10 @@
 
             <a
                 href="{{ route('guru.penilaian.index') }}"
-                class="rounded-xl border border-white/10
+                class="rounded-xl border border-slate-200 bg-white
                     px-5 py-3 text-sm font-semibold
-                    text-slate-300 hover:bg-white/5 transition"
+                    text-slate-700 hover:bg-slate-50 hover:text-indigo-600
+                    shadow-sm transition-all duration-200"
             >
                 Kembali
             </a>
@@ -146,7 +147,8 @@
                 href="{{ route('guru.penilaian.edit', $penilaian->id) }}"
                 class="rounded-xl bg-indigo-600
                     px-5 py-3 text-sm font-semibold
-                    text-white hover:bg-indigo-500 transition"
+                    text-white hover:bg-indigo-700
+                    shadow-sm active:scale-[0.98] transition-all duration-200"
             >
                 Edit Penilaian
             </a>

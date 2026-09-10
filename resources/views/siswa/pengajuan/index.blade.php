@@ -5,7 +5,7 @@
     </x-slot>
 
     <div class="mb-8">
-        <h1 class="text-3xl font-extrabold header-title">
+        <h1 class="text-3xl font-extrabold text-slate-800 tracking-tight">
             Pengajuan PKL
         </h1>
 
@@ -18,7 +18,7 @@
 
         {{-- Pesan sukses --}}
         @if(session('success'))
-            <div class="rounded-xl border border-green-500/20 bg-green-500/8 px-5 py-4 text-green-400 text-sm">
+            <div class="rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-green-700 text-sm">
                 {{ session('success') }}
             </div>
         @endif
@@ -50,14 +50,15 @@
         </div>
 
         {{-- Tabel pengajuan --}}
-        <div class="overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02]">
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
             <div class="overflow-x-auto">
 
                 <table class="w-full text-left">
 
                     <thead>
-                        <tr class="border-b border-white/5">
+
+                        <tr class="border-b border-slate-200 bg-slate-50">
 
                             <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
                                 No
@@ -84,23 +85,24 @@
                             </th>
 
                         </tr>
+
                     </thead>
 
-                    <tbody class="divide-y divide-white/[0.03]">
+                    <tbody class="divide-y divide-slate-100">
 
                         @forelse($pengajuans as $pengajuan)
 
-                            <tr class="hover:bg-white/[0.02] transition">
+                            <tr class="hover:bg-slate-50 transition">
 
                                 {{-- No --}}
-                                <td class="px-6 py-4 text-slate-400 text-sm">
+                                <td class="px-6 py-4 text-slate-600 text-sm">
                                     {{ $loop->iteration }}
                                 </td>
 
                                 {{-- Tempat PKL --}}
                                 <td class="px-6 py-4">
 
-                                    <p class="font-semibold text-white text-sm">
+                                    <p class="font-semibold text-slate-800 text-sm">
                                         {{ $pengajuan->tempatPkl->nama_perusahaan ?? '-' }}
                                     </p>
 
@@ -115,13 +117,13 @@
 
                                     @if($pengajuan->status === 'Lolos')
 
-                                        <p class="font-semibold text-white text-sm">
+                                        <p class="font-semibold text-slate-800 text-sm">
                                             {{ $pengajuan->siswa->guruPembimbing->nama ?? '-' }}
                                         </p>
 
                                     @else
 
-                                        <span class="text-xs text-slate-600">
+                                        <span class="text-xs text-slate-400">
                                             Belum ditentukan
                                         </span>
 
@@ -130,8 +132,10 @@
                                 </td>
 
                                 {{-- Tanggal Pengajuan --}}
-                                <td class="px-6 py-4 text-slate-400 text-sm">
+                                <td class="px-6 py-4 text-slate-600 text-sm">
+
                                     {{ \Carbon\Carbon::parse($pengajuan->tanggal_pengajuan)->format('d-m-Y') }}
+
                                 </td>
 
                                 {{-- Status --}}
@@ -139,23 +143,32 @@
 
                                     @if($pengajuan->status === 'Menunggu Seleksi')
 
-                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400 border border-yellow-500/15">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-yellow-50 px-3 py-1 text-xs font-semibold text-yellow-700 border border-yellow-200">
+
+                                            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+
                                             Menunggu Seleksi
+
                                         </span>
 
                                     @elseif($pengajuan->status === 'Lolos')
 
-                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-400 border border-green-500/15">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700 border border-green-200">
+
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+
                                             Lolos
+
                                         </span>
 
                                     @else
 
-                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-400 border border-red-500/15">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-700 border border-red-200">
+
+                                            <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+
                                             Tidak Lolos
+
                                         </span>
 
                                     @endif
@@ -176,13 +189,13 @@
 
                                     @elseif($pengajuan->status === 'Menunggu Seleksi')
 
-                                        <span class="text-xs text-slate-600">
+                                        <span class="text-xs text-slate-400">
                                             Menunggu hasil seleksi
                                         </span>
 
                                     @elseif($pengajuan->status === 'Lolos')
 
-                                        <span class="text-xs text-green-400/80 font-medium">
+                                        <span class="text-xs text-green-600 font-medium">
                                             ✓ Pengajuan diterima
                                         </span>
 
@@ -198,7 +211,7 @@
 
                                 <td
                                     colspan="6"
-                                    class="px-6 py-16 text-center text-slate-600 text-sm"
+                                    class="px-6 py-16 text-center text-slate-400 text-sm"
                                 >
                                     Belum ada pengajuan PKL.
                                 </td>

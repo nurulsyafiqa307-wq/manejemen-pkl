@@ -6,12 +6,10 @@
 
     <div class="mb-8">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-
             <div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold header-title tracking-tight">
+                <h1 class="text-2xl sm:text-3xl font-extrabold header-title tracking-tight text-slate-900">
                     Jurnal Harian
                 </h1>
-
                 <p class="text-slate-500 mt-2 text-sm">
                     Catatan kegiatan PKL kamu setiap hari.
                 </p>
@@ -21,25 +19,23 @@
                class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:from-blue-500 hover:to-indigo-500 transition shadow-lg shadow-blue-600/15 whitespace-nowrap">
                 + Isi Jurnal
             </a>
-
         </div>
     </div>
 
 
     {{-- Daftar jurnal --}}
-    <div class="bg-white/[0.02] border border-white/5 rounded-2xl overflow-hidden">
+    <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
 
         {{-- Header --}}
-        <div class="p-5 sm:p-6 border-b border-white/5">
-
+        <div class="p-5 sm:p-6 border-b border-slate-200 bg-slate-50/70">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
                 <div>
-                    <h2 class="text-base font-bold text-white">
+                    <h2 class="text-base font-bold text-slate-800">
                         Riwayat Jurnal
                     </h2>
 
-                    <p class="text-xs text-slate-600 mt-1">
+                    <p class="text-xs text-slate-500 mt-1">
                         Semua jurnal PKL yang sudah kamu isi.
                     </p>
                 </div>
@@ -90,33 +86,45 @@
 
                         {{-- Tombol sebelumnya --}}
                         @if($bulanSebelumnya)
+
                             <a href="{{ route('siswa.jurnal.index', ['bulan' => $bulanSebelumnya]) }}"
-                               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 bg-white/[0.03] text-slate-400 hover:bg-white/[0.06] hover:text-white transition"
+                               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 bg-white text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition"
                                title="Bulan sebelumnya">
+
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      class="w-4 h-4"
                                      fill="none"
                                      viewBox="0 0 24 24"
                                      stroke="currentColor">
+
                                     <path stroke-linecap="round"
                                           stroke-linejoin="round"
                                           stroke-width="2"
                                           d="M15 19l-7-7 7-7"/>
+
                                 </svg>
+
                             </a>
+
                         @else
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/5 bg-white/[0.02] text-slate-700">
+
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 bg-slate-100 text-slate-300">
+
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      class="w-4 h-4"
                                      fill="none"
                                      viewBox="0 0 24 24"
                                      stroke="currentColor">
+
                                     <path stroke-linecap="round"
                                           stroke-linejoin="round"
                                           stroke-width="2"
                                           d="M15 19l-7-7 7-7"/>
+
                                 </svg>
+
                             </span>
+
                         @endif
 
 
@@ -127,12 +135,12 @@
                                 $tanggalBulanAktif = \Carbon\Carbon::createFromFormat('Y-m', $bulan);
                             @endphp
 
-                            <h3 class="text-white font-bold text-base sm:text-lg">
+                            <h3 class="text-slate-800 font-bold text-base sm:text-lg">
                                 {{ $bulanIndonesia[(int) $tanggalBulanAktif->format('n')] }}
                                 {{ $tanggalBulanAktif->format('Y') }}
                             </h3>
 
-                            <p class="text-[11px] text-slate-600 mt-1">
+                            <p class="text-[11px] text-slate-500 mt-1">
                                 Jurnal pada bulan ini
                             </p>
 
@@ -141,33 +149,45 @@
 
                         {{-- Tombol berikutnya --}}
                         @if($bulanBerikutnya)
+
                             <a href="{{ route('siswa.jurnal.index', ['bulan' => $bulanBerikutnya]) }}"
-                               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/10 bg-white/[0.03] text-slate-400 hover:bg-white/[0.06] hover:text-white transition"
+                               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 bg-white text-slate-500 hover:bg-slate-100 hover:text-blue-600 transition"
                                title="Bulan berikutnya">
+
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      class="w-4 h-4"
                                      fill="none"
                                      viewBox="0 0 24 24"
                                      stroke="currentColor">
+
                                     <path stroke-linecap="round"
                                           stroke-linejoin="round"
                                           stroke-width="2"
                                           d="M9 5l7 7-7 7"/>
+
                                 </svg>
+
                             </a>
+
                         @else
-                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/5 bg-white/[0.02] text-slate-700">
+
+                            <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 bg-slate-100 text-slate-300">
+
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      class="w-4 h-4"
                                      fill="none"
                                      viewBox="0 0 24 24"
                                      stroke="currentColor">
+
                                     <path stroke-linecap="round"
                                           stroke-linejoin="round"
                                           stroke-width="2"
                                           d="M9 5l7 7-7 7"/>
+
                                 </svg>
+
                             </span>
+
                         @endif
 
                     </div>
@@ -187,7 +207,7 @@
                                class="whitespace-nowrap px-4 py-2 rounded-xl text-xs font-semibold transition
                                {{ $isAktif
                                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                                    : 'bg-white/[0.03] border border-white/5 text-slate-500 hover:text-white hover:bg-white/[0.06]'
+                                    : 'bg-white border border-slate-200 text-slate-500 hover:text-blue-600 hover:bg-blue-50'
                                }}">
 
                                 {{ $bulanIndonesia[(int) $tanggalBulan->format('n')] }}
@@ -212,7 +232,7 @@
             <table class="w-full text-left min-w-[600px]">
 
                 <thead>
-                    <tr class="border-b border-white/5">
+                    <tr class="border-b border-slate-200 bg-slate-50">
 
                         <th class="px-6 py-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                             No
@@ -242,26 +262,26 @@
                 </thead>
 
 
-                <tbody class="divide-y divide-white/[0.03]">
+                <tbody class="divide-y divide-slate-100">
 
                     @forelse($jurnals as $jurnal)
 
-                        <tr class="hover:bg-white/[0.02] transition">
+                        <tr class="hover:bg-slate-50 transition">
 
                             {{-- NO --}}
-                            <td class="px-6 py-4 text-slate-400 text-sm">
+                            <td class="px-6 py-4 text-slate-500 text-sm">
                                 {{ $loop->iteration }}
                             </td>
 
 
                             {{-- TANGGAL --}}
-                            <td class="px-6 py-4 text-white font-medium text-sm">
+                            <td class="px-6 py-4 text-slate-800 font-medium text-sm">
                                 {{ \Carbon\Carbon::parse($jurnal->tanggal)->format('d-m-Y') }}
                             </td>
 
 
                             {{-- JAM --}}
-                            <td class="px-6 py-4 text-slate-400 text-sm whitespace-nowrap">
+                            <td class="px-6 py-4 text-slate-500 text-sm whitespace-nowrap">
                                 {{ $jurnal->jam_masuk }} - {{ $jurnal->jam_pulang }}
                             </td>
 
@@ -269,7 +289,7 @@
                             {{-- KEGIATAN --}}
                             <td class="px-6 py-4">
 
-                                <p class="text-white text-sm font-medium max-w-xs truncate">
+                                <p class="text-slate-800 text-sm font-medium max-w-xs truncate">
                                     {{ $jurnal->kegiatan }}
                                 </p>
 
@@ -281,9 +301,9 @@
 
                                 @if($jurnal->status_jurnal === 'Menunggu Review')
 
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400 border border-yellow-500/15">
+                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-yellow-50 px-3 py-1 text-xs font-semibold text-yellow-700 border border-yellow-200">
 
-                                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
 
                                         Menunggu Review
 
@@ -291,9 +311,9 @@
 
                                 @elseif($jurnal->status_jurnal === 'Disetujui')
 
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-400 border border-green-500/15">
+                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700 border border-green-200">
 
-                                        <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
 
                                         Disetujui
 
@@ -301,9 +321,9 @@
 
                                 @else
 
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-400 border border-red-500/15">
+                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-700 border border-red-200">
 
-                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
 
                                         Perlu Revisi
 
@@ -323,7 +343,7 @@
                                     @if($jurnal->status_jurnal === 'Perlu Revisi')
 
                                         <a href="{{ route('siswa.jurnal.edit', $jurnal->id_jurnal) }}"
-                                           class="inline-flex items-center gap-2 rounded-lg bg-yellow-500/10 border border-yellow-500/15 px-4 py-2 text-xs font-semibold text-yellow-400 hover:bg-yellow-500/20 transition">
+                                           class="inline-flex items-center gap-2 rounded-lg bg-yellow-50 border border-yellow-200 px-4 py-2 text-xs font-semibold text-yellow-700 hover:bg-yellow-100 transition">
 
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  class="w-3.5 h-3.5"
@@ -352,11 +372,10 @@
                                           data-confirm-message="Yakin ingin menghapus jurnal ini? Jurnal yang dihapus tidak dapat dikembalikan.">
 
                                         @csrf
-
                                         @method('DELETE')
 
                                         <button type="submit"
-                                                class="inline-flex items-center gap-2 rounded-lg bg-red-500/10 border border-red-500/15 px-4 py-2 text-xs font-semibold text-red-400 hover:bg-red-500/20 transition">
+                                                class="inline-flex items-center gap-2 rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-xs font-semibold text-red-700 hover:bg-red-100 transition">
 
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  class="w-3.5 h-3.5"
@@ -391,9 +410,9 @@
 
                                 <div class="flex flex-col items-center">
 
-                                    <div class="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center mb-4">
+                                    <div class="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center mb-4">
 
-                                        <svg class="w-7 h-7 text-slate-600"
+                                        <svg class="w-7 h-7 text-slate-400"
                                              fill="none"
                                              stroke="currentColor"
                                              viewBox="0 0 24 24">
@@ -407,11 +426,11 @@
 
                                     </div>
 
-                                    <p class="text-white font-medium text-sm">
+                                    <p class="text-slate-800 font-medium text-sm">
                                         Belum ada jurnal
                                     </p>
 
-                                    <p class="text-slate-600 text-xs mt-1">
+                                    <p class="text-slate-500 text-xs mt-1">
                                         Belum ada jurnal pada bulan ini.
                                     </p>
 

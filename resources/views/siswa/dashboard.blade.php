@@ -6,13 +6,15 @@
 
     {{-- HEADER --}}
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-white tracking-tight">
+
+        <h1 class="text-3xl font-bold text-slate-900 tracking-tight">
             Dashboard Siswa
         </h1>
 
-        <p class="text-slate-400 mt-2">
+        <p class="text-slate-500 mt-2">
             Selamat datang, {{ auth()->user()->name ?? 'Siswa' }}
         </p>
+
     </div>
 
 
@@ -21,34 +23,36 @@
 
 
         {{-- STATUS PKL --}}
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6
-                    hover:border-yellow-500/50 transition-all duration-300
+        <div class="bg-white border border-slate-200 rounded-2xl p-6
+                    hover:border-yellow-300 transition-all duration-300
                     hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-500/10">
 
             <div class="flex items-center justify-between">
 
                 <div>
-                    <p class="text-sm text-slate-400 font-medium">
+
+                    <p class="text-sm text-slate-500 font-medium">
                         Status PKL
                     </p>
 
                     <h2 class="text-2xl font-bold mt-2
                         {{ ($siswa->status_pkl ?? '') === 'Disetujui'
-                            ? 'text-emerald-400'
-                            : 'text-yellow-400' }}">
+                            ? 'text-emerald-600'
+                            : 'text-yellow-600' }}">
 
                         {{ $siswa->status_pkl ?? 'Belum Mengajukan' }}
 
                     </h2>
 
-                    <p class="text-xs text-slate-500 mt-1">
+                    <p class="text-xs text-slate-400 mt-1">
                         Status pengajuan saat ini
                     </p>
+
                 </div>
 
-                <div class="bg-yellow-500/10 p-3 rounded-xl shrink-0">
+                <div class="bg-yellow-50 p-3 rounded-xl shrink-0">
 
-                    <svg class="w-8 h-8 text-yellow-400"
+                    <svg class="w-8 h-8 text-yellow-500"
                          fill="none"
                          stroke="currentColor"
                          viewBox="0 0 24 24">
@@ -69,38 +73,42 @@
 
 
         {{-- JURNAL HARI INI --}}
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6
-                    hover:border-blue-500/50 transition-all duration-300
+        <div class="bg-white border border-slate-200 rounded-2xl p-6
+                    hover:border-blue-300 transition-all duration-300
                     hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10">
 
             <div class="flex items-center justify-between">
 
                 <div>
 
-                    <p class="text-sm text-slate-400 font-medium">
+                    <p class="text-sm text-slate-500 font-medium">
                         Jurnal Hari Ini
                     </p>
 
                     @if($jurnalHariIni)
 
-                        <h2 class="text-2xl font-bold text-emerald-400 mt-2">
+                        <h2 class="text-2xl font-bold text-emerald-600 mt-2">
                             Sudah Diisi
                         </h2>
 
                         <a href="{{ route('siswa.jurnal.index') }}"
-                           class="text-xs text-blue-400 mt-1 hover:text-blue-300 hover:underline inline-block">
+                           class="text-xs text-blue-600 mt-1 hover:text-blue-700 hover:underline inline-block">
+
                             Lihat jurnal
+
                         </a>
 
                     @else
 
-                        <h2 class="text-2xl font-bold text-yellow-400 mt-2">
+                        <h2 class="text-2xl font-bold text-yellow-600 mt-2">
                             Belum Diisi
                         </h2>
 
                         <a href="{{ route('siswa.jurnal.create') }}"
-                           class="text-xs text-blue-400 mt-1 hover:text-blue-300 hover:underline inline-block">
+                           class="text-xs text-blue-600 mt-1 hover:text-blue-700 hover:underline inline-block">
+
                             Isi sekarang
+
                         </a>
 
                     @endif
@@ -108,9 +116,9 @@
                 </div>
 
 
-                <div class="bg-blue-500/10 p-3 rounded-xl shrink-0">
+                <div class="bg-blue-50 p-3 rounded-xl shrink-0">
 
-                    <svg class="w-8 h-8 text-blue-400"
+                    <svg class="w-8 h-8 text-blue-600"
                          fill="none"
                          stroke="currentColor"
                          viewBox="0 0 24 24">
@@ -131,29 +139,33 @@
 
 
         {{-- NILAI --}}
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6
-                    hover:border-emerald-500/50 transition-all duration-300
+        <div class="bg-white border border-slate-200 rounded-2xl p-6
+                    hover:border-emerald-300 transition-all duration-300
                     hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/10">
 
             <div class="flex items-center justify-between">
 
                 <div>
 
-                    <p class="text-sm text-slate-400 font-medium">
+                    <p class="text-sm text-slate-500 font-medium">
                         Nilai PKL
                     </p>
 
-                    <h2 class="text-2xl font-bold text-emerald-400 mt-2">
+                    <h2 class="text-2xl font-bold text-emerald-600 mt-2">
 
                         @if($penilaian)
+
                             {{ number_format($penilaian->rata_rata, 1) }}
+
                         @else
+
                             -
+
                         @endif
 
                     </h2>
 
-                    <p class="text-xs text-slate-500 mt-1">
+                    <p class="text-xs text-slate-400 mt-1">
 
                         {{ $penilaian
                             ? 'Nilai terbaru'
@@ -164,9 +176,9 @@
                 </div>
 
 
-                <div class="bg-emerald-500/10 p-3 rounded-xl shrink-0">
+                <div class="bg-emerald-50 p-3 rounded-xl shrink-0">
 
-                    <svg class="w-8 h-8 text-emerald-400"
+                    <svg class="w-8 h-8 text-emerald-600"
                          fill="none"
                          stroke="currentColor"
                          viewBox="0 0 24 24">
@@ -189,11 +201,11 @@
 
 
     {{-- INFORMASI SISWA & PKL --}}
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6">
 
-        <div class="mb-6 border-b border-slate-800 pb-4">
+        <div class="mb-6 border-b border-slate-200 pb-4">
 
-            <h2 class="text-xl font-bold text-white">
+            <h2 class="text-xl font-bold text-slate-900">
                 Informasi PKL
             </h2>
 
@@ -208,13 +220,13 @@
 
 
             {{-- NAMA --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     Nama Lengkap
                 </p>
 
-                <p class="text-base font-medium text-white mt-1">
+                <p class="text-base font-medium text-slate-800 mt-1">
                     {{ $user->name ?? '-' }}
                 </p>
 
@@ -222,13 +234,13 @@
 
 
             {{-- EMAIL --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     Email
                 </p>
 
-                <p class="text-base font-medium text-white mt-1 break-all">
+                <p class="text-base font-medium text-slate-800 mt-1 break-all">
                     {{ $user->email ?? '-' }}
                 </p>
 
@@ -236,13 +248,13 @@
 
 
             {{-- NIS --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     NIS
                 </p>
 
-                <p class="text-base font-medium text-white mt-1">
+                <p class="text-base font-medium text-slate-800 mt-1">
                     {{ $siswa->nis ?? '-' }}
                 </p>
 
@@ -250,13 +262,13 @@
 
 
             {{-- KELAS --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     Kelas
                 </p>
 
-                <p class="text-base font-medium text-white mt-1">
+                <p class="text-base font-medium text-slate-800 mt-1">
                     {{ $siswa->kelas ?? '-' }}
                 </p>
 
@@ -264,13 +276,13 @@
 
 
             {{-- JURUSAN --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     Jurusan
                 </p>
 
-                <p class="text-base font-medium text-white mt-1">
+                <p class="text-base font-medium text-slate-800 mt-1">
                     {{ $siswa->jurusan ?? '-' }}
                 </p>
 
@@ -278,7 +290,7 @@
 
 
             {{-- STATUS --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     Status PKL
@@ -286,8 +298,8 @@
 
                 <span class="inline-block mt-1 px-3 py-1 text-xs font-semibold rounded-full
                     {{ ($siswa->status_pkl ?? '') === 'Disetujui'
-                        ? 'bg-emerald-500/20 text-emerald-400'
-                        : 'bg-yellow-500/20 text-yellow-400' }}">
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : 'bg-yellow-100 text-yellow-700' }}">
 
                     {{ $siswa->status_pkl ?? 'Belum PKL' }}
 
@@ -297,13 +309,13 @@
 
 
             {{-- TEMPAT PKL --}}
-            <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4 md:col-span-2">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 md:col-span-2">
 
                 <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                     Tempat PKL
                 </p>
 
-                <p class="text-base font-medium text-white mt-1">
+                <p class="text-base font-medium text-slate-800 mt-1">
                     {{ $siswa->tempat_pkl ?? '-' }}
                 </p>
 
